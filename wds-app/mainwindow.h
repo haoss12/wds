@@ -23,7 +23,7 @@ private:
     QSerialPort *port;  /**< Pointer to the serial port */
     //QSerialPortInfo port_info;
     //QByteArray data; /**< array for storing received data */
-    dataFrame data;
+    dataFrame data; /**< Data frame to parse info from serial port*/
     float angX; /**< X axis angle */
     float angY; /**< Y axis angle */
     float angZ; /**< Z axis angle */

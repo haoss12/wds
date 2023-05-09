@@ -9,45 +9,50 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="116"/>
-        <source>   Y:</source>
-        <oldsource>Y:</oldsource>
+        <location filename="mainwindow.ui" line="136"/>
+        <source>    Oś Y:  </source>
+        <oldsource>   Oś Y: </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="132"/>
-        <source>   X:</source>
-        <oldsource>X:</oldsource>
+        <location filename="mainwindow.ui" line="123"/>
+        <source>    Oś X:  </source>
+        <oldsource>   Oś X: </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="145"/>
-        <source>   Z:</source>
-        <oldsource>Z:</oldsource>
+        <location filename="mainwindow.ui" line="149"/>
+        <source>    Oś Z:  </source>
+        <oldsource>   Oś Z: </oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="234"/>
+        <location filename="mainwindow.ui" line="79"/>
+        <source>Estymowana orientacja rakiety</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="223"/>
         <source>Wyszukaj urządzenia szeregowe</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="260"/>
+        <location filename="mainwindow.ui" line="249"/>
         <source>Połącz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="276"/>
+        <location filename="mainwindow.ui" line="265"/>
         <source>Rozłącz</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="301"/>
+        <location filename="mainwindow.ui" line="290"/>
         <source>Pozycja lotek</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="320"/>
+        <location filename="mainwindow.ui" line="309"/>
         <source>Wizualizacja orientacji</source>
         <translation type="unfinished"></translation>
     </message>

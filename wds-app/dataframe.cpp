@@ -6,10 +6,6 @@ int dataFrame::parseData(const QString &line)
     return parseData(line.toStdString());
 }
 
-void dataFrame::print() const {
-    std::cout << acc[2] << " " << gyro[2] << std::endl;
-}
-
 int dataFrame::parseData(const std::string &line) {
 
     //check if start sign is ok
@@ -48,7 +44,7 @@ int dataFrame::getAcc(uint8_t ind) const {
     return acc[ind];
 }
 
-int dataFrame::getGyro(uint8_t ind) const {
+float dataFrame::getGyro(uint8_t ind) const {
 
     if (ind > (gyro.size() - 1)) {
         throw std::out_of_range("dataFrame::getGyro - Index out of range.");
