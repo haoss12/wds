@@ -56,42 +56,34 @@ void MainWindow::read_data()
         if (this->first == false) {
             QString line = this->port->readLine();
             //std::string temp;
-            std::stringstream stream (line.toStdString());
-            float gyro[3];
-            int acc[3];
-            char dump;
-            stream >> dump >> gyro[0] >> gyro[1] >> gyro[2] >> acc[0] >> acc[1] >> acc[2];
-
-            QString terminator = "\r";
-            int pos = line.lastIndexOf(terminator);
-            line = line.left(pos);
-
             ui->textEdit->append(line);
+            if (data.parseData(line)) {
 
-            float accX = (float)acc[0] * ACC_SENSITIVITY;
-            float accY = (float)acc[1] * ACC_SENSITIVITY;
-            float accZ = (float)acc[2] * ACC_SENSITIVITY;
+                float accX = (float)data.getAcc(0) * ACC_SENSITIVITY;
+                float accY = (float)data.getAcc(1) * ACC_SENSITIVITY;
+                float accZ = (float)data.getAcc(2) * ACC_SENSITIVITY;
 
-            float gyroX = gyro[0] * GYRO_SENSITIVITY * DT;
-            float gyroY = gyro[1] * GYRO_SENSITIVITY * DT;
-            float gyroZ = gyro[2] * GYRO_SENSITIVITY * DT;
+                float gyroX = data.getGyro(0) * GYRO_SENSITIVITY * DT;
+                float gyroY = data.getGyro(1) * GYRO_SENSITIVITY * DT;
+                float gyroZ = data.getGyro(2) * GYRO_SENSITIVITY * DT;
 
-            float accAngX = (float)((atan2(accY, accZ)) + M_PI ) * (180 / M_PI);
-            float accAngY = (float)((atan2(accZ, accX)) + M_PI ) * (180 / M_PI);
+                float accAngX = (float)((atan2(accY, accZ)) + M_PI ) * (180 / M_PI);
+                float accAngY = (float)((atan2(accZ, accX)) + M_PI ) * (180 / M_PI);
 
-            this->angX = ALPHA * (gyroX * DT + this->angX) + (1.0f - ALPHA) * accAngX;
-            this->angY = ALPHA * (gyroY * DT + this->angY) + (1.0f - ALPHA) * accAngY;
-            this->angZ = (ALPHA * (gyroZ * DT) + this->angZ);
+                this->angX = ALPHA * (gyroX * DT + this->angX) + (1.0f - ALPHA) * accAngX;
+                this->angY = ALPHA * (gyroY * DT + this->angY) + (1.0f - ALPHA) * accAngY;
+                this->angZ = (ALPHA * (gyroZ * DT) + this->angZ);
 
-            if (abs(this->angY) > 400) {
-                this->angY = 0.0f;
+                if (abs(this->angY) > 400) {
+                    this->angY = 0.0f;
+                }
+
+                ui->label_x_axis->setText(QString::number(this->angX) + " stopni");
+                ui->label_y_axis->setText(QString::number(this->angY - 90.0f) + " stopni");
+                ui->label_z_axis->setText(QString::number(this->angZ) + " stopni\r\n");
+
+                qDebug() << this->angX << this->angY << this->angZ;
             }
-
-            ui->textEdit->append("X: " + QString::number(this->angX) + " stopni");
-            ui->textEdit->append("Y: " + QString::number(this->angY - 90.0f) + " stopni");
-            ui->textEdit->append("Z: " + QString::number(this->angZ) + " stopni\r\n");
-
-            qDebug() << this->angX << this->angY << this->angZ;
         }
       else if (this->first == true)
         {

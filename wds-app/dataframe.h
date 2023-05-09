@@ -11,6 +11,7 @@
 class dataFrame
 {
 public:
+    dataFrame(): start('X'){};
     dataFrame(char _start): start(_start){};
 
     int parseData(const std::string &line);

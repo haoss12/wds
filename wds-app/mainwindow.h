@@ -5,6 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
 #include <QList>
+#include "dataframe.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -21,7 +22,8 @@ public:
 private:
     QSerialPort *port;  /**< Pointer to the serial port */
     //QSerialPortInfo port_info;
-    QByteArray data; /**< array for storing received data */
+    //QByteArray data; /**< array for storing received data */
+    dataFrame data;
     float angX; /**< X axis angle */
     float angY; /**< Y axis angle */
     float angZ; /**< Z axis angle */
