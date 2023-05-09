@@ -21,6 +21,9 @@ set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
+        dataframe.h
+        dataframe.cpp
+        crc8.h
         mainwindow.ui
         ${TS_FILES}
 )
