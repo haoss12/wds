@@ -113,7 +113,7 @@ border-radius: 7px;</string>
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>   Y:</string>
+                  <string>Y:</string>
                  </property>
                 </widget>
                </item>
@@ -129,7 +129,7 @@ border-radius: 7px;</string>
                   <string notr="true">text-align: right;</string>
                  </property>
                  <property name="text">
-                  <string>   X:</string>
+                  <string>X:</string>
                  </property>
                 </widget>
                </item>
@@ -142,7 +142,7 @@ border-radius: 7px;</string>
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>   Z:</string>
+                  <string>Z:</string>
                  </property>
                 </widget>
                </item>

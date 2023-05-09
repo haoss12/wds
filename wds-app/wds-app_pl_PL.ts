@@ -10,20 +10,20 @@
     </message>
     <message>
         <location filename="mainwindow.ui" line="116"/>
-        <source>   Y:</source>
-        <oldsource>Y:</oldsource>
+        <source>Y:</source>
+        <oldsource>   Y:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="132"/>
-        <source>   X:</source>
-        <oldsource>X:</oldsource>
+        <source>X:</source>
+        <oldsource>   X:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="mainwindow.ui" line="145"/>
-        <source>   Z:</source>
-        <oldsource>Z:</oldsource>
+        <source>Z:</source>
+        <oldsource>   Z:</oldsource>
         <translation type="unfinished"></translation>
     </message>
     <message>

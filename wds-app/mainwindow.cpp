@@ -14,6 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
     this->port = new QSerialPort(this);
     ui->openGLWidget->hide();
     ui->pushButton->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+    ui->label->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_2->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_6->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
 //    ui->tableWidget->setRowCount(6);
 //    ui->tableWidget->setColumnCount(3);
 //    QStringList labels;
@@ -53,11 +56,11 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::read_data()
 {
     while (this->port->canReadLine()) {
-        if (this->first == false) {
             QString line = this->port->readLine();
             //std::string temp;
-            ui->textEdit->append(line);
-            if (data.parseData(line)) {
+
+            if (data.parseData(line) == 0) {
+                ui->textEdit->append(line);
 
                 float accX = (float)data.getAcc(0) * ACC_SENSITIVITY;
                 float accY = (float)data.getAcc(1) * ACC_SENSITIVITY;
@@ -84,11 +87,6 @@ void MainWindow::read_data()
 
                 qDebug() << this->angX << this->angY << this->angZ;
             }
-        }
-      else if (this->first == true)
-        {
-            this->first = false;
-        }
     }
 }
 
