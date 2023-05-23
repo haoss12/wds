@@ -171,7 +171,7 @@ border-radius: 7px;</string>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QOpenGLWidget" name="openGLWidget">
+           <widget class="RocketRenderer" name="openGLWidget">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
               <horstretch>0</horstretch>
@@ -181,13 +181,7 @@ border-radius: 7px;</string>
            </widget>
           </item>
           <item>
-           <widget class="QWidget" name="widget" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+           <widget class="QGraphicsView" name="graphicsView">
             <property name="styleSheet">
              <string notr="true">background-color: rgba(204, 199, 172, 200);
 border-radius: 7px;</string>
@@ -310,6 +304,19 @@ border-radius: 7px;</string>
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="pushButton_6">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(0, 0, 0);
+background: rgb(204, 199, 172);
+border: 2px solid rgb(0, 0, 0);
+border-radius: 7px;</string>
+            </property>
+            <property name="text">
+             <string>Test lotki</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
        </layout>
@@ -319,37 +326,44 @@ border-radius: 7px;</string>
    </layout>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RocketRenderer</class>
+   <extends>QOpenGLWidget</extends>
+   <header>rocketrenderer.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>pushButton_2</sender>
    <signal>clicked()</signal>
-   <receiver>openGLWidget</receiver>
+   <receiver>graphicsView</receiver>
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>700</x>
+     <x>821</x>
+     <y>31</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>984</x>
+     <y>587</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>graphicsView</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>618</x>
      <y>25</y>
     </hint>
     <hint type="destinationlabel">
-     <x>681</x>
-     <y>137</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>widget</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>602</x>
-     <y>19</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>627</x>
-     <y>378</y>
+     <x>984</x>
+     <y>587</y>
     </hint>
    </hints>
   </connection>
@@ -360,28 +374,28 @@ border-radius: 7px;</string>
    <slot>show()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>826</x>
-     <y>18</y>
+     <x>713</x>
+     <y>30</y>
     </hint>
     <hint type="destinationlabel">
-     <x>831</x>
-     <y>87</y>
+     <x>718</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
   <connection>
-   <sender>pushButton_2</sender>
+   <sender>pushButton</sender>
    <signal>clicked()</signal>
-   <receiver>widget</receiver>
+   <receiver>openGLWidget</receiver>
    <slot>hide()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>907</x>
-     <y>20</y>
+     <x>574</x>
+     <y>29</y>
     </hint>
     <hint type="destinationlabel">
-     <x>863</x>
-     <y>454</y>
+     <x>578</x>
+     <y>72</y>
     </hint>
    </hints>
   </connection>

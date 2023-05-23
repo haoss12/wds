@@ -11,8 +11,10 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools SerialPort REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools SerialPort REQUIRED)
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets OpenGL LinguistTools SerialPort REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets OpenGL LinguistTools SerialPort REQUIRED)
 # find_package(Qt5::SerialPort)
 
 set(TS_FILES wds-app_pl_PL.ts)
@@ -25,6 +27,8 @@ set(PROJECT_SOURCES
         dataframe.cpp
         crc8.h
         crc8.cpp
+        rocketrenderer.h
+        rocketrenderer.cpp
         mainwindow.ui
         ${TS_FILES}
 )
@@ -56,7 +60,7 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(wds-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt5::SerialPort)
+target_link_libraries(wds-app PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt5::SerialPort Qt5::OpenGL ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 
 set_target_properties(wds-app PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com

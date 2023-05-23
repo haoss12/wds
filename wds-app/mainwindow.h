@@ -4,7 +4,12 @@
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
 #include <QtSerialPort/QSerialPortInfo>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QGraphicsPixmapItem>
 #include <QList>
+#include <QOpenGLFunctions>
+#include <QOpenGLWidget>
 #include "dataframe.h"
 
 QT_BEGIN_NAMESPACE
@@ -28,6 +33,8 @@ private:
     float angY; /**< Y axis angle */
     float angZ; /**< Z axis angle */
     bool first; /**< Flag to indicate if it is the first data to read after opening port */
+    QGraphicsScene *scene;
+    QGraphicsPixmapItem *fin;
 
     /**
      * @brief Reads and processes data from the port
@@ -92,6 +99,12 @@ private slots:
      * @brief Change style sheet of the button when its released.
     */
     void on_pushButton_3_released();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_6_pressed();
+
+    void on_pushButton_6_released();
 
 private:
     Ui::MainWindow *ui;

@@ -3,9 +3,11 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
+#include <GL/glut.h>
 
 int main(int argc, char *argv[])
 {
+    glutInit(&argc, argv);
     QApplication a(argc, argv);
 
     QTranslator translator;

@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QThread>
 #include <sstream>
 #include <math.h>
 
@@ -20,12 +21,23 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_x_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
     ui->label_y_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
     ui->label_z_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
-//    ui->tableWidget->setRowCount(6);
-//    ui->tableWidget->setColumnCount(3);
-//    QStringList labels;
-//    labels << "Typ" << "Odczyt" << "Jednostka";
-//    ui->tableWidget->setHorizontalHeaderLabels(labels);
-//    ui->tableWidget->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+    scene = new QGraphicsScene(this);
+    this->fin = new QGraphicsPixmapItem(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
+    this->fin->setScale(0.3);
+    this->fin->setTransformOriginPoint(150, 150);
+    this->scene->addItem(this->fin);
+    //this->fin->setPos(QPointF(100, 100));
+
+    ui->graphicsView->setScene(scene);
+
+    //Scene setup
+//        scene = new QGraphicsScene(ui->page_4);
+//        lander = new QGraphicsPixmapItem(QPixmap(":/new/prefix1/pic/lander.png"));
+//        lander->setScale(.1);
+//        lander->setTransformOriginPoint(285, 267);
+//        scene->addItem(lander);
+//        ui->viewer->setScene(scene);
+
 }
 
 MainWindow::~MainWindow()
@@ -210,6 +222,26 @@ void MainWindow::on_pushButton_3_pressed()
 
 
 void MainWindow::on_pushButton_3_released()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    button->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+}
+
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    this->fin->setRotation(this->fin->rotation() + 10);
+}
+
+
+void MainWindow::on_pushButton_6_pressed()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    button->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+}
+
+
+void MainWindow::on_pushButton_6_released()
 {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     button->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
