@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QDateTime>
+#include <QChar>
 #include <QThread>
 #include <sstream>
 #include <math.h>
@@ -22,10 +23,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_y_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
     ui->label_z_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
     scene = new QGraphicsScene(this);
-    this->fin = new QGraphicsPixmapItem(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
-    this->fin->setScale(0.3);
-    this->fin->setTransformOriginPoint(150, 150);
-    this->scene->addItem(this->fin);
+    this->fin2 = new QGraphicsPixmapItem(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
+    this->fin2->setScale(0.3);
+    this->fin2->setTransformOriginPoint(150, 150);
+    this->scene->addItem(this->fin2);
+    this->fin1 = this->scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
+    this->fin1->setScale(0.3);
+    this->fin1->setTransformOriginPoint(150, 150);
+    this->fin1->setPos(200, 200);
     //this->fin->setPos(QPointF(100, 100));
 
     ui->graphicsView->setScene(scene);
@@ -96,11 +101,22 @@ void MainWindow::read_data()
                     this->angY = 0.0f;
                 }
 
-                ui->label_x_axis->setText(" " + QString::number(this->angX) + " stopni");
-                ui->label_y_axis->setText(" " + QString::number(this->angY - 90.0f) + " stopni");
-                ui->label_z_axis->setText(" " + QString::number(this->angZ) + " stopni");
+                ui->label_x_axis->setText(" " + QString::number(this->angX, 'd', 2) + " stopni"); //QString::arg(double a, int fieldWidth = 0, char format = 'g', int precision = -1, QChar fillChar = QLatin1Char(' '))
+                ui->label_y_axis->setText(" " + QString::number(this->angY - 90.0f, 'd', 2) + " stopni");
+                ui->label_z_axis->setText(" " + QString::number(this->angZ, 'd', 2) + " stopni");
+
+                ui->label_gyro_x->setText(" " + QString(gyroX >= 0, ' ') + QString::number(gyroX, 'd', 2) + " rad/s");
+                ui->label_gyro_y->setText(" " + QString(gyroY >= 0, ' ') + QString::number(gyroY, 'd', 2) + " rad/s");
+                ui->label_gyro_z->setText(" " + QString(gyroZ >= 0, ' ') + QString::number(gyroZ, 'd', 2) + " rad/s");
+
+                ui->label_acc_x->setText(" " + QString(accX >= 0, ' ') + QString::number(accX, 'd', 2) + " m/s^2");
+                ui->label_acc_y->setText(" " + QString(accY >= 0, ' ') + QString::number(accY, 'd', 2) + " m/s^2");
+                ui->label_acc_z->setText(" " + QString(accZ >= 0, ' ') + QString::number(accZ, 'd', 2) + " m/s^2");
 
                 qDebug() << this->angX << this->angY << this->angZ;
+
+                ui->openGLWidget->setAngles(this->angX, this->angY - 90.0f, this->angZ);
+                update();
             }
     }
 }
@@ -230,7 +246,7 @@ void MainWindow::on_pushButton_3_released()
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    this->fin->setRotation(this->fin->rotation() + 10);
+    this->fin1->setRotation(this->fin1->rotation() + 10);
 }
 
 

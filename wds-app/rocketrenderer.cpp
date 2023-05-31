@@ -5,7 +5,9 @@
 RocketRenderer::RocketRenderer(QWidget *parent) :
     QOpenGLWidget(parent)
 {
-    this->ang = 0.0;
+    this->angX = 0.0;
+    this->angY = 0.0;
+    this->angZ = 0.0;
 
     connect( &timer, SIGNAL(timeout()), this, SLOT(update()) );
     timer.start(16);
@@ -33,13 +35,18 @@ void RocketRenderer::paintGL()
 
     glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
-        gluLookAt( 0,0,5,  0,0,0,  0,1,0 );
+        gluLookAt( 0,5,0,  0,0,0,  0,0,1 );
+        //gluLookAt( 0,0,5,  0,0,0,  0,1,0 );
 
         glColor3f(1.0, 0.0, 0.0);
 
-        ang += 0.5;
+//        angX += 0.5;
+//        angY += 0.5;
+//        angZ += 0.5;
 
-        glRotatef(ang, 1, 1, 1);
+        glRotatef(angX, 1.0, 0.0, 0.0);
+        glRotatef(angY, 0.0, 1.0, 0.0);
+        glRotatef(angZ, 0.0, 0.0, 1.0);
 
         glutWireTorus(0.2, 0.4, 20, 20);
 }

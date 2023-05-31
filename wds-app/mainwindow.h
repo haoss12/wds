@@ -34,7 +34,7 @@ private:
     float angZ; /**< Z axis angle */
     bool first; /**< Flag to indicate if it is the first data to read after opening port */
     QGraphicsScene *scene;
-    QGraphicsPixmapItem *fin;
+    QGraphicsPixmapItem *fin1, *fin2, *fin3, *fin4;
 
     /**
      * @brief Reads and processes data from the port
