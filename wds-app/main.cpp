@@ -8,17 +8,12 @@
 int main(int argc, char *argv[])
 {
     glutInit(&argc, argv);
-    QApplication a(argc, argv);
-
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "wds-app_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-            break;
-        }
+    QTranslator *translator = new QTranslator;
+    if(!translator->load("/home/hubert/wds/wds-app/wds-app_en_EN.qm")) {
+        qDebug() << "Error in loading translation file";
     }
+    QApplication a(argc, argv);
+    a.installTranslator(translator);
     MainWindow w;
     w.show();
     return a.exec();

@@ -10,6 +10,10 @@
 #include <QList>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts>
 #include "dataframe.h"
 
 QT_BEGIN_NAMESPACE
@@ -32,14 +36,28 @@ private:
     float angX; /**< X axis angle */
     float angY; /**< Y axis angle */
     float angZ; /**< Z axis angle */
+    float counter; /**< Counter for plot */
     bool first; /**< Flag to indicate if it is the first data to read after opening port */
-    QGraphicsScene *scene;
-    QGraphicsPixmapItem *fin1, *fin2, *fin3, *fin4;
+    QGraphicsScene *scene, *gyro_icon_scene, *acc_icon_scene, *rocket_icon_scene; /**< Scenes for drawing items */
+    QGraphicsPixmapItem *fin1, *fin2, *fin3, *fin4, *acc_icon, *gyro_icon, *rocket_icon; /**< Pixmaps for items */
+    QLineSeries *series; /**< Series for plot */
+    QChart *chart; /**< Chart pointer */
+    QChartView *chart_view; /**< Chart view object */
+    QVBoxLayout *layout; /**< Layout to scale chart */
+    QValueAxis *axis_x; /**< X Axis scale */
 
     /**
      * @brief Reads and processes data from the port
      */
     void read_data();
+
+
+    /**
+     * @brief Add new data to angle chart
+     *
+     * @param in - data to put into chart
+     */
+    void add_to_chart(const float &data);
 
 private slots:
     void on_pushButton_clicked();
@@ -105,6 +123,14 @@ private slots:
     void on_pushButton_6_pressed();
 
     void on_pushButton_6_released();
+
+    void on_pushButton_7_pressed();
+
+    void on_pushButton_7_released();
+
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_9_clicked();
 
 private:
     Ui::MainWindow *ui;

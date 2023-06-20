@@ -1,4 +1,6 @@
 notes 
 build-wds-app-Desktop-Debug/ 
+build-wds-app-Desktop-Release/
 doxy_docs/
-
+docs_test/
+Doxyfile_backup

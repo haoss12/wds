@@ -6,95 +6,147 @@
     <message>
         <location filename="mainwindow.ui" line="26"/>
         <source>MainWindow</source>
-        <translation type="unfinished"></translation>
+        <translation>MainWindow</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="101"/>
+        <location filename="mainwindow.ui" line="324"/>
         <source>  Gyro Z:</source>
-        <translation type="unfinished"></translation>
+        <translation>  Gyro Z:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="108"/>
+        <location filename="mainwindow.ui" line="493"/>
         <source>   Acc X:</source>
-        <translation type="unfinished"></translation>
+        <translation>   Acc X:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="115"/>
+        <location filename="mainwindow.ui" line="350"/>
         <source>  Gyro X:</source>
-        <translation type="unfinished"></translation>
+        <translation>  Gyro X:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="135"/>
+        <location filename="mainwindow.ui" line="263"/>
         <source>    Oś Y:  </source>
         <oldsource>   Oś Y: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>    Oś Y:  </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="177"/>
+        <location filename="mainwindow.ui" line="285"/>
         <source>    Oś X:  </source>
         <oldsource>   Oś X: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>    Oś X:  </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="197"/>
+        <location filename="mainwindow.ui" line="244"/>
         <source>    Oś Z:  </source>
         <oldsource>   Oś Z: </oldsource>
-        <translation type="unfinished"></translation>
+        <translation>    Oś Z:  </translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="211"/>
+        <location filename="mainwindow.ui" line="467"/>
         <source>   Acc Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>   Acc Y:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="232"/>
+        <location filename="mainwindow.ui" line="337"/>
         <source>  Gyro Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>  Gyro Y:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="239"/>
+        <location filename="mainwindow.ui" line="480"/>
         <source>   Acc Z:</source>
-        <translation type="unfinished"></translation>
+        <translation>   Acc Z:</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="79"/>
+        <location filename="mainwindow.ui" line="221"/>
         <source>Estymowana orientacja rakiety</source>
-        <translation type="unfinished"></translation>
+        <translation>Estymowana orientacja rakiety</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="301"/>
+        <location filename="mainwindow.ui" line="64"/>
         <source>Wyszukaj urządzenia szeregowe</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyszukaj urządzenia szeregowe</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="327"/>
+        <location filename="mainwindow.ui" line="90"/>
         <source>Połącz</source>
-        <translation type="unfinished"></translation>
+        <translation>Połącz</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="343"/>
+        <location filename="mainwindow.ui" line="106"/>
         <source>Rozłącz</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozłącz</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="368"/>
+        <location filename="mainwindow.ui" line="131"/>
         <source>Pozycja lotek</source>
-        <translation type="unfinished"></translation>
+        <translation>Pozycja lotek</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="387"/>
+        <location filename="mainwindow.ui" line="150"/>
         <source>Wizualizacja orientacji</source>
-        <translation type="unfinished"></translation>
+        <translation>Wizualizacja orientacji</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="400"/>
+        <location filename="mainwindow.ui" line="163"/>
+        <source>Wykres</source>
+        <translation>Wykres</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.ui" line="176"/>
         <source>Test lotki</source>
-        <translation type="unfinished"></translation>
+        <translation>Test lotki</translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="65"/>
+        <location filename="mainwindow.ui" line="207"/>
         <source>Odczyty z sensorów</source>
-        <translation type="unfinished"></translation>
+        <translation>Odczyty z sensorów</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="88"/>
+        <source>Kąty rakiety</source>
+        <translation>Kąty rakiety</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="204"/>
+        <location filename="mainwindow.cpp" line="205"/>
+        <source>Trwa szukanie urządzeń...</source>
+        <translation>Trwa szukanie urządzeń...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="217"/>
+        <location filename="mainwindow.cpp" line="218"/>
+        <source>Żadne urządzenie nie zostało wykryte</source>
+        <translation>Żadne urządzenie nie zostało wykryte</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="228"/>
+        <source>Znaleziono: </source>
+        <translation>Znaleziono: </translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="251"/>
+        <source>Nie można połączyć - brak wykrytych urządzeń!</source>
+        <translation>Nie można połączyć - brak wykrytych urządzeń!</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="270"/>
+        <source>Otwarcie portu szeregowego się udało!</source>
+        <translation>Otwarcie portu szeregowego się udało!</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="274"/>
+        <source>Otwarcie portu szeregowego się nie udało!</source>
+        <translation>Otwarcie portu szeregowego się nie udało!</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="284"/>
+        <source>Zamknięto port!</source>
+        <translation>Zamknięto port!</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="289"/>
+        <source>Port nie jest otwarty!</source>
+        <translation>Port nie jest otwarty!</translation>
     </message>
 </context>
 </TS>

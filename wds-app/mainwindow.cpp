@@ -5,6 +5,10 @@
 #include <QDateTime>
 #include <QChar>
 #include <QThread>
+#include <QtCharts/QLineSeries>
+#include <QtCharts/QChart>
+#include <QtCharts/QChartView>
+#include <QtCharts>
 #include <sstream>
 #include <math.h>
 
@@ -15,34 +19,79 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     this->port = new QSerialPort(this);
     ui->openGLWidget->hide();
+    ui->chart_frame->hide();
     ui->pushButton->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
     ui->label->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
     ui->label_2->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
     ui->label_6->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
-    ui->label_x_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
-    ui->label_y_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
-    ui->label_z_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+    ui->label_10->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_5->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_8->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_14->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_12->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+    ui->label_16->setAlignment(Qt::AlignVCenter | Qt::AlignRight);
+//    ui->label_x_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+//    ui->label_y_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+//    ui->label_z_axis->setAlignment(Qt::AlignVCenter | Qt::AlignLeft);
+
     scene = new QGraphicsScene(this);
     this->fin2 = new QGraphicsPixmapItem(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
-    this->fin2->setScale(0.3);
+    this->fin2->setScale(0.5);
     this->fin2->setTransformOriginPoint(150, 150);
     this->scene->addItem(this->fin2);
     this->fin1 = this->scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
-    this->fin1->setScale(0.3);
+    this->fin1->setScale(0.5);
     this->fin1->setTransformOriginPoint(150, 150);
     this->fin1->setPos(200, 200);
-    //this->fin->setPos(QPointF(100, 100));
-
+    this->fin3 = this->scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
+    this->fin3->setScale(0.5);
+    this->fin3->setTransformOriginPoint(150, 150);
+    this->fin3->setPos(200, 0);
+    this->fin4 = this->scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/fin.png"));
+    this->fin4->setScale(0.5);
+    this->fin4->setTransformOriginPoint(150, 150);
+    this->fin4->setPos(0, 200);
     ui->graphicsView->setScene(scene);
 
-    //Scene setup
-//        scene = new QGraphicsScene(ui->page_4);
-//        lander = new QGraphicsPixmapItem(QPixmap(":/new/prefix1/pic/lander.png"));
-//        lander->setScale(.1);
-//        lander->setTransformOriginPoint(285, 267);
-//        scene->addItem(lander);
-//        ui->viewer->setScene(scene);
+    gyro_icon_scene = new QGraphicsScene(this);
+    this->gyro_icon = this->gyro_icon_scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/gyro_.png"));
+    this->gyro_icon->setScale(0.7);
+    this->gyro_icon->setTransformOriginPoint(50, 50);
+    ui->graphicsView_gyro_icon->setScene(gyro_icon_scene);
 
+    acc_icon_scene = new QGraphicsScene(this);
+    this->acc_icon = this->acc_icon_scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/acc_.png"));
+    this->acc_icon->setScale(0.7);
+    this->acc_icon->setTransformOriginPoint(50, 50);
+    ui->graphicsView_acc_icon->setScene(acc_icon_scene);
+
+    rocket_icon_scene = new QGraphicsScene(this);
+    this->rocket_icon = this->rocket_icon_scene->addPixmap(QPixmap("/home/hubert/wds/wds-app/assets/rocket_.png"));
+    this->rocket_icon->setScale(0.7);
+    this->rocket_icon->setTransformOriginPoint(50, 50);
+    ui->graphicsView_axis_icon->setScene(rocket_icon_scene);
+
+    counter = 0.0f;
+
+    series = new QLineSeries();
+    this->series->append(counter, -60.0f);
+    counter += 1.0f;
+    *series << QPointF(counter, 360.0f);
+    counter += 1.0f;
+    this->chart = new QChart();
+    this->chart->legend()->hide();
+    this->chart->createDefaultAxes();
+    QValueAxis *axis_y = new QValueAxis();
+    axis_y->setRange(-60, 360);
+    this->chart->setAxisY(axis_y, series);
+    this->chart->addSeries(this->series);
+    this->chart->setTitle(tr("Kąty rakiety"));
+    this->chart->setTheme(QChart::ChartThemeBrownSand);
+
+    this->chart_view = new QChartView(this->chart);
+    this->chart_view->setRenderHint(QPainter::Antialiasing);
+    this->layout = new QVBoxLayout(ui->chart_frame);
+    this->layout->addWidget(chart_view);
 }
 
 MainWindow::~MainWindow()
@@ -68,7 +117,7 @@ void MainWindow::on_pushButton_2_clicked()
     another->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
 }
 
-#define ACC_SENSITIVITY  0.0061
+#define ACC_SENSITIVITY  0.00061
 #define GYRO_SENSITIVITY 0.0175
 #define ALPHA 0.6
 #define DT 0.2
@@ -101,9 +150,9 @@ void MainWindow::read_data()
                     this->angY = 0.0f;
                 }
 
-                ui->label_x_axis->setText(" " + QString::number(this->angX, 'd', 2) + " stopni"); //QString::arg(double a, int fieldWidth = 0, char format = 'g', int precision = -1, QChar fillChar = QLatin1Char(' '))
-                ui->label_y_axis->setText(" " + QString::number(this->angY - 90.0f, 'd', 2) + " stopni");
-                ui->label_z_axis->setText(" " + QString::number(this->angZ, 'd', 2) + " stopni");
+                ui->label_x_axis->setText(" " + QString(this->angX >= 0, ' ') + QString::number(this->angX, 'd', 2) + " °"); //QString::arg(double a, int fieldWidth = 0, char format = 'g', int precision = -1, QChar fillChar = QLatin1Char(' '))
+                ui->label_y_axis->setText(" " + QString((this->angY - 90.0f) >= 0, ' ') + QString::number(this->angY - 90.0f, 'd', 2) + " °");
+                ui->label_z_axis->setText(" " + QString(this->angZ >= 0, ' ') + QString::number(this->angZ, 'd', 2) + " °");
 
                 ui->label_gyro_x->setText(" " + QString(gyroX >= 0, ' ') + QString::number(gyroX, 'd', 2) + " rad/s");
                 ui->label_gyro_y->setText(" " + QString(gyroY >= 0, ' ') + QString::number(gyroY, 'd', 2) + " rad/s");
@@ -115,9 +164,36 @@ void MainWindow::read_data()
 
                 qDebug() << this->angX << this->angY << this->angZ;
 
+                this->fin2->setRotation(this->angX - 180.0);
+                this->fin1->setRotation(-this->angX  - 180.0);
+
+                this->fin3->setRotation(this->angY - 180.0);
+                this->fin4->setRotation(-this->angY  - 180.0);
+
                 ui->openGLWidget->setAngles(this->angX, this->angY - 90.0f, this->angZ);
+                add_to_chart(this->angX);
                 update();
             }
+    }
+}
+
+void MainWindow::add_to_chart(const float &data) {
+    if(this->series->count() == 200) {
+        this->series->remove(counter - 200);
+        this->series->append(this->counter, data);
+        axis_x = new QValueAxis;
+        axis_x->setRange(counter - 200, counter);
+        this->chart->setAxisX(axis_x, series);
+        this->counter += 1.0f;
+        update();
+    }
+    else {
+        this->series->append(this->counter, data);
+        axis_x = new QValueAxis;
+        axis_x->setRange(0, counter);
+        this->chart->setAxisX(axis_x, series);
+        this->counter += 1.0f;
+        update();
     }
 }
 
@@ -125,8 +201,8 @@ void MainWindow::read_data()
 void MainWindow::on_pushButton_4_clicked()
 {
     // Output debug message and status message
-    qDebug() << "Trwa szukanie urządzeń...";
-    ui->textEdit->append("Trwa szukanie urządzeń...");
+    qDebug() << tr("Trwa szukanie urządzeń...");
+    ui->textEdit->append(tr("Trwa szukanie urządzeń..."));
 
     // Get a list of available serial port devices
     QList<QSerialPortInfo> devices;
@@ -138,8 +214,8 @@ void MainWindow::on_pushButton_4_clicked()
     }
     else {
         ui->comboBox->setStyleSheet("color: rgb(0, 0, 0); background: rgb(168, 13, 16); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
-        qDebug() << "Żadne urządzenie nie zostało wykryte";
-        ui->textEdit->append("Żadne urządzenie nie zostało wykryte");
+        qDebug() << tr("Żadne urządzenie nie zostało wykryte");
+        ui->textEdit->append(tr("Żadne urządzenie nie zostało wykryte"));
     }
 
     // Clear the combo box and populate it with the names of the available devices
@@ -149,7 +225,7 @@ void MainWindow::on_pushButton_4_clicked()
       QString str = devices.at(i).portName();
       qDebug() << str;
       ui->comboBox->addItem(str);
-      ui->textEdit->append("Znaleziono: " + str);
+      ui->textEdit->append(tr("Znaleziono: ") + str);
     }
 }
 
@@ -172,7 +248,7 @@ void MainWindow::on_pushButton_4_released()
 void MainWindow::on_pushButton_5_clicked()
 {
     if (ui->comboBox->count() == 0) {
-        ui->textEdit->append("Nie można połączyć - brak wykrytych urządzeń!");
+        ui->textEdit->append(tr("Nie można połączyć - brak wykrytych urządzeń!"));
         return;
     }
     if(!port->isOpen()) {
@@ -191,11 +267,11 @@ void MainWindow::on_pushButton_5_clicked()
       this->angY = 0.0f;
       this->angZ = 0.0f;
       this->first = true;
-      ui->textEdit->append("Otwarcie portu szeregowego się udało!");
+      ui->textEdit->append(tr("Otwarcie portu szeregowego się udało!"));
       ui->comboBox->setStyleSheet("color: rgb(0, 0, 0); background: rgb(34, 139, 34); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
 
     } else {
-      ui->textEdit->append("Otwarcie portu szeregowego się nie udało!");
+      ui->textEdit->append(tr("Otwarcie portu szeregowego się nie udało!"));
     }
     }
 }
@@ -205,12 +281,12 @@ void MainWindow::on_pushButton_3_clicked()
 {
     if(port->isOpen()) {
         this->port->close();
-        ui->textEdit->append("Zamknięto port!");
+        ui->textEdit->append(tr("Zamknięto port!"));
         ui->comboBox->clear();
         ui->comboBox->setStyleSheet("color: rgb(0, 0, 0); background: rgb(168, 13, 16); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
     }
     else {
-        ui->textEdit->append("Port nie jest otwarty!");
+        ui->textEdit->append(tr("Port nie jest otwarty!"));
         return;
     }
 }
@@ -247,6 +323,7 @@ void MainWindow::on_pushButton_3_released()
 void MainWindow::on_pushButton_6_clicked()
 {
     this->fin1->setRotation(this->fin1->rotation() + 10);
+    add_to_chart(counter * 2.0f);
 }
 
 
@@ -261,5 +338,51 @@ void MainWindow::on_pushButton_6_released()
 {
     QPushButton *button = qobject_cast<QPushButton *>(sender());
     button->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+}
+
+
+void MainWindow::on_pushButton_7_pressed()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    button->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+}
+
+
+void MainWindow::on_pushButton_7_released()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    button->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+}
+
+
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    button->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+    QPushButton *another = qobject_cast<QPushButton *>(ui->pushButton_9);
+    another->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+    QTranslator *translator = new QTranslator;
+    if(!translator->load("/home/hubert/wds/wds-app/wds-app_pl_PL.qm")) {
+        qDebug() << "Error in loading translation file";
+    }
+    qDebug() << "in pl";
+    QApplication::instance()->installTranslator(translator);
+    ui->retranslateUi(this);
+}
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QPushButton *button = qobject_cast<QPushButton *>(sender());
+    button->setStyleSheet("color: rgb(0, 0, 0); font-weight: bold; background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+    QPushButton *another = qobject_cast<QPushButton *>(ui->pushButton_8);
+    another->setStyleSheet("color: rgb(0, 0, 0); background: rgb(204, 199, 172); border: 2px solid rgb(0, 0, 0); border-radius: 7px;");
+    QTranslator *translator = new QTranslator;
+    if(!translator->load("/home/hubert/wds/wds-app/wds-app_en_EN.qm")) {
+        qDebug() << "Error in loading translation file";
+    }
+    QApplication::instance()->installTranslator(translator);
+    ui->retranslateUi(this);
 }
 

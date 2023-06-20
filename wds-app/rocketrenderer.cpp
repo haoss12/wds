@@ -40,10 +40,6 @@ void RocketRenderer::paintGL()
 
         glColor3f(1.0, 0.0, 0.0);
 
-//        angX += 0.5;
-//        angY += 0.5;
-//        angZ += 0.5;
-
         glRotatef(angX, 1.0, 0.0, 0.0);
         glRotatef(angY, 0.0, 1.0, 0.0);
         glRotatef(angZ, 0.0, 0.0, 1.0);

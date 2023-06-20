@@ -9,6 +9,10 @@ class RocketRenderer : public QOpenGLWidget, protected QOpenGLFunctions
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Default RocketRenderer constructor
+     *
+     */
     RocketRenderer(QWidget *parent = 0);
 
     /**
@@ -30,12 +34,30 @@ public:
     /**
      * @brief Set rocket Euler angles
      *
-     * @param in - angles for X, Y and Z axis
+     * @param in - angles for X, Y and Z axis in degrees
      *
      */
-    void setAngles(float _x, float _y, float _z) {angX = _x; angY = _y; angZ = _z;};
+    void setAngles(float _x_deg, float _y_deg, float _z_deg) {angX = _x_deg; angY = _y_deg; angZ = _z_deg;};
+    /**
+     * @brief Set rocket Euler angle
+     *
+     * @param in - angles for X axis in degrees
+     *
+     */
     void setAngX(float _ang) {angX = _ang;};
+    /**
+     * @brief Set rocket Euler angle
+     *
+     * @param in - angles for X axis in degrees
+     *
+     */
     void setAngY(float _ang) {angY = _ang;};
+    /**
+     * @brief Set rocket Euler angle
+     *
+     * @param in - angles for X axis in degrees
+     *
+     */
     void setAngZ(float _ang) {angZ = _ang;};
 
     /**
