@@ -34,28 +34,28 @@ public:
     /**
      * @brief Set rocket Euler angles
      *
-     * @param in - angles for X, Y and Z axis in degrees
+     * @param[in] - angles for X, Y and Z axis in degrees
      *
      */
     void setAngles(float _x_deg, float _y_deg, float _z_deg) {angX = _x_deg; angY = _y_deg; angZ = _z_deg;};
     /**
      * @brief Set rocket Euler angle
      *
-     * @param in - angles for X axis in degrees
+     * @param[in] - angles for X axis in degrees
      *
      */
     void setAngX(float _ang) {angX = _ang;};
     /**
      * @brief Set rocket Euler angle
      *
-     * @param in - angles for X axis in degrees
+     * @param[in]  - angles for X axis in degrees
      *
      */
     void setAngY(float _ang) {angY = _ang;};
     /**
      * @brief Set rocket Euler angle
      *
-     * @param in - angles for X axis in degrees
+     * @param[in] - angles for X axis in degrees
      *
      */
     void setAngZ(float _ang) {angZ = _ang;};
@@ -83,8 +83,8 @@ public:
     float getAngZ() const {return angZ;};
 
 private:
-    float angX, angY, angZ;
-    QTimer timer;
+    float angX, angY, angZ; /**< X, Y and Z axis angle */
+    QTimer timer; /**< Timer for refreshing scene */
 
 };
 

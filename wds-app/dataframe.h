@@ -1,4 +1,4 @@
-#ifndef DATAFRAME_H
+ #ifndef DATAFRAME_H
 #define DATAFRAME_H
 
 #include <QString>

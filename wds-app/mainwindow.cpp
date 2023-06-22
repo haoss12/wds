@@ -366,7 +366,6 @@ void MainWindow::on_pushButton_8_clicked()
     if(!translator->load("/home/hubert/wds/wds-app/wds-app_pl_PL.qm")) {
         qDebug() << "Error in loading translation file";
     }
-    qDebug() << "in pl";
     QApplication::instance()->installTranslator(translator);
     ui->retranslateUi(this);
 }

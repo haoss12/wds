@@ -36,7 +36,9 @@ static const uint8_t crc_table[256] = {
 /**
  * @brief Function to calculating CRC8 code for given string
  *
- * @param data - string containing data to process
+ * @param[in] data - string containing data to process
+ *
+ * @return calculated crc8 code
  */
 uint8_t crc8(const std::string &data);
 

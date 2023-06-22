@@ -30,8 +30,6 @@ public:
 
 private:
     QSerialPort *port;  /**< Pointer to the serial port */
-    //QSerialPortInfo port_info;
-    //QByteArray data; /**< array for storing received data */
     dataFrame data; /**< Data frame to parse info from serial port*/
     float angX; /**< X axis angle */
     float angY; /**< Y axis angle */
@@ -60,8 +58,15 @@ private:
     void add_to_chart(const float &data);
 
 private slots:
+
+    /**
+     * @brief Change style sheet of the button when its pressed to make it highlighted.
+    */
     void on_pushButton_clicked();
 
+    /**
+     * @brief Change style sheet of the button when its pressed to make it highlighted.
+    */
     void on_pushButton_2_clicked();
 
     /**
@@ -118,18 +123,39 @@ private slots:
     */
     void on_pushButton_3_released();
 
+    /**
+     * @brief Test rotation of the fins
+    */
     void on_pushButton_6_clicked();
 
+    /**
+     * @brief Change style sheet of the button when its pressed to make it highlighted.
+    */
     void on_pushButton_6_pressed();
 
+    /**
+     * @brief Change style sheet of the button when its released.
+    */
     void on_pushButton_6_released();
 
+    /**
+     * @brief Change style sheet of the button when its pressed to make it highlighted.
+    */
     void on_pushButton_7_pressed();
 
+    /**
+     * @brief Change style sheet of the button when its released.
+    */
     void on_pushButton_7_released();
 
+    /**
+     * @brief Change application language to polish, also change style sheet of the button when its pressed to make it highlighted.
+    */
     void on_pushButton_8_clicked();
 
+    /**
+     * @brief Change application language to english, also change style sheet of the button when its pressed to make it highlighted.
+    */
     void on_pushButton_9_clicked();
 
 private:
